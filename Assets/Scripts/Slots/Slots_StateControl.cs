@@ -2,22 +2,15 @@ using UnityEngine;
 
 public class Slots_StateControl : MonoBehaviour
 {
-    [Header("References")]
+    [Header("Scene References")]
     [SerializeField] private Slots_UI ui;
     [SerializeField] private Slots_Machine slotMachine;
     
-    private Slots_GameState gameState;
+    public Slots_GameState gameState {get; private set;}
 
-    void Start() => gameState = Slots_GameState.STARTING;
+    public void initialize() => gameState = Slots_GameState.STARTING;
 
-    public Slots_GameState getGameState() => gameState;
-
-    /*
-        public void progress
-        
-        Perform an action based on the current gameState.
-        Also, set next gameState.
-    */
+    // Perform an action based on the current gameState and set next gameState.
     public void progress() {
         switch (gameState) {
             case Slots_GameState.STARTING:

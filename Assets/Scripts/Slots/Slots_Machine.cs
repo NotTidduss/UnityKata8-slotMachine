@@ -10,27 +10,19 @@ public class Slots_Machine : MonoBehaviour
     private string currentSymbolReel1;
     private string currentSymbolReel2;
     private string currentSymbolReel3;
-    private string resultText;
-    private int resultScore;
+    public string resultText;
+    public int resultScore;
 
     /*
-        public void setSymbolReel
-
         When checkers determine a new symbol, update them here.
         @param id: identifies which checker wants to update.
         @param symbol: the current symbol on the reel.
     */
     public void setSymbolReel(int id, string symbol) {
         switch (id) {
-            case 1:
-                currentSymbolReel1 = symbol;
-                return;
-            case 2:
-                currentSymbolReel2 = symbol;
-                return;
-            case 3:
-                currentSymbolReel3 = symbol;
-                return;            
+            case 1: currentSymbolReel1 = symbol; return;
+            case 2: currentSymbolReel2 = symbol; return;
+            case 3: currentSymbolReel3 = symbol; return;            
         }
     }
 
@@ -45,8 +37,6 @@ public class Slots_Machine : MonoBehaviour
     public void stopReel3() => reel3.toggleSpin();
 
     /*
-        public void finish
-
         Called by StateControl, determines if player won or lost and sets texts accordingly.
         Also Update the total score based on result.
     */
@@ -55,21 +45,16 @@ public class Slots_Machine : MonoBehaviour
 
         if (currentSymbolReel1 == currentSymbolReel2 && currentSymbolReel1 == currentSymbolReel3) win();
         else lose();
-        PlayerPrefs.SetInt("kata8_totalScore", PlayerPrefs.GetInt("kata8_totalScore") + resultScore);
+        PlayerPrefs.SetInt("slots_totalScore", PlayerPrefs.GetInt("slots_totalScore") + resultScore);
     }
 
-    public string getResultText() => resultText;
-    public void setResultText(string s) => resultText = s;
-    public int getResultScore() => resultScore;
-    public void setResultScore(int i) => resultScore = i;
-
     private void win() {
-        setResultText("YOU WIN");
-        setResultScore(1000);
+        resultText = "YOU WIN";
+        resultScore = 1000;
     }
 
     private void lose() {
-        setResultText("YOU LOSE");
-        setResultScore(-50);
+        resultText = "YOU LOSE";
+        resultScore = -50;
     }
 }

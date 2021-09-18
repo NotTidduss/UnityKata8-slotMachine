@@ -20,9 +20,9 @@ public class Slots_UI : MonoBehaviour
     */
     public void finish() {
         resultsScreen.SetActive(true);
-        textResult.text = slotMachine.getResultText();
-        textScore.text = "Score: " + slotMachine.getResultScore();
-        textTotalScore.text = "Total Score: " + PlayerPrefs.GetInt("kata8_totalScore").ToString();
+        textResult.text = slotMachine.resultText;
+        textScore.text = "Score: " + slotMachine.resultScore;
+        textTotalScore.text = "Total Score: " + PlayerPrefs.GetInt("slots_totalScore").ToString();
     }
 
     public void playAgain() => SceneManager.LoadScene("1_SlotMachine");

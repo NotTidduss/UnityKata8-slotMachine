@@ -3,24 +3,22 @@ using UnityEngine;
 
 public class Slots_Master : MonoBehaviour
 {
-    [Header("Settings")]
-    [SerializeField] private KeyCode btnInteract = KeyCode.Space;
-    [SerializeField] private float btnCooldown = 0.5f;
-    [SerializeField] private float finishingWaittime = 3;
-
-    [Header("References")]
+    [Header("Scene References")]
+    public Slots_System sys;
     public Slots_StateControl stateControl;
 
     void Start() {
+        stateControl.initialize();
+
         StartCoroutine("CheckForInput");
         StartCoroutine("CheckForFinish");
     }
 
     IEnumerator CheckForInput() {
         while (true) { 
-            if (Input.GetKeyUp(btnInteract)) {
+            if (Input.GetKeyUp(sys.btnInteract)) {
                 stateControl.progress();
-                yield return new WaitForSeconds(btnCooldown);
+                yield return new WaitForSeconds(sys.btnCooldown);
             }
             yield return null;
         }
@@ -28,8 +26,8 @@ public class Slots_Master : MonoBehaviour
 
     IEnumerator CheckForFinish() {
         while (true) { 
-            if (stateControl.getGameState() == Slots_GameState.FINISHING) {
-                yield return new WaitForSeconds(finishingWaittime);
+            if (stateControl.gameState == Slots_GameState.FINISHING) {
+                yield return new WaitForSeconds(sys.finishingWaittime);
                 stateControl.progress();
                 Destroy(this);
             }
