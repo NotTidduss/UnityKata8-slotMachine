@@ -2,19 +2,50 @@ using UnityEngine;
 
 public class Slots_Machine : MonoBehaviour
 {
-    [Header("References")]
+    [Header("Reels")]
     [SerializeField] private Slots_Reel reel1;
     [SerializeField] private Slots_Reel reel2;
     [SerializeField] private Slots_Reel reel3;
 
+
+    //* links
+    public Slots_StateControl stateControl { get; private set; }
+
+    //* private vars
     private string currentSymbolReel1;
     private string currentSymbolReel2;
     private string currentSymbolReel3;
-    public string resultText;
-    public int resultScore;
+
+
+    public void Initialize(Slots_StateControl stateControlRef) {
+        // set link
+        stateControl = stateControlRef;
+
+        // initialize reels
+        reel1.Initialize(this);
+        reel1.toggleSpin();
+
+        reel2.Initialize(this);
+        reel2.toggleSpin();
+
+        reel3.Initialize(this);
+        reel3.toggleSpin();
+    }
+
+    public void Terminate() {
+        Debug.Log(currentSymbolReel1 + " " + currentSymbolReel2 + " " + currentSymbolReel3);
+
+        // determine outcome
+        if (currentSymbolReel1 == currentSymbolReel2 && currentSymbolReel1 == currentSymbolReel3) 
+            win();
+        else 
+            lose();
+    }
+
 
     /*
         When checkers determine a new symbol, update them here.
+
         @param id: identifies which checker wants to update.
         @param symbol: the current symbol on the reel.
     */
@@ -26,35 +57,11 @@ public class Slots_Machine : MonoBehaviour
         }
     }
 
-    public void startSpinning() {
-        reel1.toggleSpin();
-        reel2.toggleSpin();
-        reel3.toggleSpin();
-    }
-
     public void stopReel1() => reel1.toggleSpin();
     public void stopReel2() => reel2.toggleSpin();
     public void stopReel3() => reel3.toggleSpin();
 
-    /*
-        Called by StateControl, determines if player won or lost and sets texts accordingly.
-        Also Update the total score based on result.
-    */
-    public void finish() {
-        Debug.Log(currentSymbolReel1 + " " + currentSymbolReel2 + " " + currentSymbolReel3);
 
-        if (currentSymbolReel1 == currentSymbolReel2 && currentSymbolReel1 == currentSymbolReel3) win();
-        else lose();
-        PlayerPrefs.SetInt("slots_totalScore", PlayerPrefs.GetInt("slots_totalScore") + resultScore);
-    }
-
-    private void win() {
-        resultText = "YOU WIN";
-        resultScore = 1000;
-    }
-
-    private void lose() {
-        resultText = "YOU LOSE";
-        resultScore = -50;
-    }
+    private void win() => PlayerPrefs.SetInt("slots_outcome", (int)Slots_Outcome.MATCH);
+    private void lose() => PlayerPrefs.SetInt("slots_outcome", (int)Slots_Outcome.NOTHING);
 }

@@ -1,29 +1,55 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class Slots_UI : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private Slots_Machine slotMachine;
     [SerializeField] private GameObject resultsScreen;
     [SerializeField] private Text textResult;
     [SerializeField] private Text textScore;
     [SerializeField] private Text textTotalScore;
 
-    void Start() => resultsScreen.SetActive(false);
 
-    /*
-        public void finish
-        
-        Shows the result screen and sets its texts.
-    */
-    public void finish() {
+    //* links
+    public Slots_Master master { get; private set; }
+
+    //* private vars
+    private int resultScore;
+
+
+    public void Initialize(Slots_Master masterRef) 
+    {
+        // set master link
+        master = masterRef;
+
+        // prepare UI
+        resultsScreen.SetActive(false);
+    }
+
+    public void Terminate() 
+    {
+        // set UI to final state
         resultsScreen.SetActive(true);
-        textResult.text = slotMachine.resultText;
-        textScore.text = "Score: " + slotMachine.resultScore;
+
+        // update score & score related UI elements
+        switch ((Slots_Outcome)PlayerPrefs.GetInt("slots_outcome")) 
+        {
+            case Slots_Outcome.NOTHING:
+                resultScore = -50;
+                textResult.text = master.sys.messageNothing;
+                textScore.text = "Score: " + master.sys.scoreNothing;
+                break;
+            case Slots_Outcome.MATCH:
+                resultScore = 1000;
+                textResult.text = master.sys.messageMatch;
+                textScore.text = "Score: " + master.sys.scoreMatch;
+                break;
+        }
+        PlayerPrefs.SetInt("slots_totalScore", PlayerPrefs.GetInt("slots_totalScore") + resultScore);
         textTotalScore.text = "Total Score: " + PlayerPrefs.GetInt("slots_totalScore").ToString();
     }
 
-    public void playAgain() => SceneManager.LoadScene("1_SlotMachine");
+#region Button Functions
+    public void playAgain() => Slots_SceneMaster.loadGameScene();
+#endregion
 }

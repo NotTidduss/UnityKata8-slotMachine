@@ -3,18 +3,31 @@ using UnityEngine;
 public class Slots_StateControl : MonoBehaviour
 {
     [Header("Scene References")]
-    [SerializeField] private Slots_UI ui;
     [SerializeField] private Slots_Machine slotMachine;
     
+
+    //* links
+    public Slots_Master master { get; private set; }
+
+    //* private vars
     public Slots_GameState gameState {get; private set;}
 
-    public void initialize() => gameState = Slots_GameState.STARTING;
+
+    public void Initialize(Slots_Master masterRef) 
+    {
+        // set link to master
+        master = masterRef; 
+
+        // set starting game state
+        gameState = Slots_GameState.STARTING;
+    } 
+
 
     // Perform an action based on the current gameState and set next gameState.
     public void progress() {
         switch (gameState) {
             case Slots_GameState.STARTING:
-                slotMachine.startSpinning();
+                slotMachine.Initialize(this);
                 gameState = Slots_GameState.SPINNING;
                 return;
             case Slots_GameState.SPINNING:
@@ -30,8 +43,8 @@ public class Slots_StateControl : MonoBehaviour
                 gameState = Slots_GameState.FINISHING;
                 return;
             case Slots_GameState.FINISHING:
-                slotMachine.finish();
-                ui.finish();
+                slotMachine.Terminate();
+                master.ui.Terminate();
                 return;
         }
     }

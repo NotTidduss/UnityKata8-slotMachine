@@ -3,30 +3,46 @@ using UnityEngine;
 
 public class Slots_Master : MonoBehaviour
 {
-    [Header("Scene References")]
+    [Header("Scene Elements")]
     public Slots_System sys;
+    public Slots_UI ui;
     public Slots_StateControl stateControl;
 
-    void Start() {
-        stateControl.initialize();
 
-        StartCoroutine("CheckForInput");
-        StartCoroutine("CheckForFinish");
+    void Start() 
+    {
+        // prepare PlayerPrefs
+        Slots_PlayerPrefsMaster.initializePlayerPrefs();
+
+        // prepare Scene
+        ui.Initialize(this);
+        stateControl.Initialize(this);
+
+        // start coroutines
+        StartCoroutine(CheckForInput());
+        StartCoroutine(CheckForGameOver());
     }
 
+
+    // Input management
     IEnumerator CheckForInput() {
-        while (true) { 
-            if (Input.GetKeyUp(sys.btnInteract)) {
+        for(;;) 
+        { 
+            if (Input.GetKeyDown(sys.btnInteract)) 
+            {
                 stateControl.progress();
-                yield return new WaitForSeconds(sys.btnCooldown);
+                yield return new WaitForSeconds(sys.interactionCooldown);
             }
             yield return null;
         }
     }
 
-    IEnumerator CheckForFinish() {
-        while (true) { 
-            if (stateControl.gameState == Slots_GameState.FINISHING) {
+    // wait until all reels stopped and prepare for finishing the scene
+    IEnumerator CheckForGameOver() {
+        for(;;) 
+        { 
+            if (stateControl.gameState == Slots_GameState.FINISHING) 
+            {
                 yield return new WaitForSeconds(sys.finishingWaittime);
                 stateControl.progress();
                 Destroy(this);

@@ -361,8 +361,6 @@ MonoBehaviour:
   reel1: {fileID: 650080008}
   reel2: {fileID: 1318666522}
   reel3: {fileID: 1478446564}
-  resultText: 
-  resultScore: 0
 --- !u!1 &273075254
 GameObject:
   m_ObjectHideFlags: 0
@@ -1578,8 +1576,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30320ad290cb8de488536451ba0667a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spinSpeed: 0.5
-  targetAngle: 45
 --- !u!1 &657469400
 GameObject:
   m_ObjectHideFlags: 0
@@ -2777,7 +2773,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95228275775dbf942a5ca260733f6850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotMachine: {fileID: 198744848}
   resultsScreen: {fileID: 657469400}
   textResult: {fileID: 1104763419}
   textScore: {fileID: 273075256}
@@ -3003,6 +2998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sys: {fileID: 1756792137}
+  ui: {fileID: 1107959632}
   stateControl: {fileID: 1154318926}
 --- !u!114 &1154318926
 MonoBehaviour:
@@ -3016,7 +3012,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12795b658a87ba14d8f7045017e3bcb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ui: {fileID: 1107959632}
   slotMachine: {fileID: 198744848}
 --- !u!1 &1174075750
 GameObject:
@@ -3359,8 +3354,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30320ad290cb8de488536451ba0667a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spinSpeed: 0.5
-  targetAngle: 45
 --- !u!1 &1334816191
 GameObject:
   m_ObjectHideFlags: 0
@@ -3702,8 +3695,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30320ad290cb8de488536451ba0667a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spinSpeed: 0.5
-  targetAngle: 45
 --- !u!1 &1607730320
 GameObject:
   m_ObjectHideFlags: 0
@@ -4081,9 +4072,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11603e9d82a5134469d50acc6fd7c0e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionCooldown: 0.5
+  finishingWaittime: 1.5
   btnInteract: 32
-  btnCooldown: 0.5
-  finishingWaittime: 3
+  messageMatch: YOU WIN
+  messageNothing: YOU LOSE
+  scoreMatch: 1000
+  scoreNothing: -50
+  reelSpinSpeed: 0.5
+  reelTargetAngle: 45
 --- !u!1 &1870394610
 GameObject:
   m_ObjectHideFlags: 0
