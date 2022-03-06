@@ -1,18 +1,21 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Slots_Machine : MonoBehaviour
 {
-    [Header("Reels")]
-    [SerializeField] private Slots_Reel reel1;
-    [SerializeField] private Slots_Reel reel2;
-    [SerializeField] private Slots_Reel reel3;
+    [Header("Reel Prefab Reference")]
+    [SerializeField] private GameObject reelPrefab;
 
 
     //* links
     public Slots_StateControl stateControl { get; private set; }
 
     //* private vars
-    private string currentSymbolReel1;
+    private int reelCount;                  // given by system
+    private int currentReelIndex;           // points to reel in reel list that will be stopped next
+    private float reelDistance;             // given by system
+    private List<GameObject> reelObjects;   // holds all reels that are dynamically added to scene based on reelCount
+    private string currentSymbolReel1;  
     private string currentSymbolReel2;
     private string currentSymbolReel3;
 
@@ -21,15 +24,18 @@ public class Slots_Machine : MonoBehaviour
         // set link
         stateControl = stateControlRef;
 
-        // initialize reels
-        reel1.Initialize(this);
-        reel1.toggleSpin();
+        // prepare private vars
+        reelCount = stateControl.master.sys.reelCount;
+        reelDistance = stateControl.master.sys.reelDistance;
+        currentReelIndex = 0;
 
-        reel2.Initialize(this);
-        reel2.toggleSpin();
-
-        reel3.Initialize(this);
-        reel3.toggleSpin();
+        // fill reelObjects list with clones of the prefab
+        reelObjects = new List<GameObject>();
+        for (int i = 0; i < reelCount; i++) {
+            GameObject reelObject = Instantiate(reelPrefab, new Vector3(i * reelDistance, 0, 0), reelPrefab.transform.rotation, this.gameObject.transform);
+            reelObjects.Add(reelObject);
+            reelObject.GetComponent<Slots_Reel>().Initialize(this);
+        }
     }
 
     public void Terminate() {
@@ -57,10 +63,9 @@ public class Slots_Machine : MonoBehaviour
         }
     }
 
-    public void stopReel1() => reel1.toggleSpin();
-    public void stopReel2() => reel2.toggleSpin();
-    public void stopReel3() => reel3.toggleSpin();
-
+    public void startSpinning() => reelObjects.ForEach(reelObject => reelObject.GetComponent<Slots_Reel>().startSpin());
+    public void stopCurrentReel() => reelObjects[currentReelIndex].GetComponent<Slots_Reel>().stopSpin();
+    public void incrementReelIndex() => currentReelIndex += 1;
 
     private void win() => PlayerPrefs.SetInt("slots_outcome", (int)Slots_Outcome.MATCH);
     private void lose() => PlayerPrefs.SetInt("slots_outcome", (int)Slots_Outcome.NOTHING);

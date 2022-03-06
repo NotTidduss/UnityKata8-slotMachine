@@ -12,6 +12,8 @@ public class Slots_System : MonoBehaviour
 
 
     [Header ("Slot Machine Preferences")]
+    public int reelCount = 3;
+    public float reelDistance = 3;
     public string messageMatch = "YOU WIN";
     public string messageNothing = "YOU LOSE";
     public float scoreMatch = 1000;

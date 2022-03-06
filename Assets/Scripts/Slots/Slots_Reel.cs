@@ -9,7 +9,6 @@ public class Slots_Reel : MonoBehaviour
     //* private vars
     private float spinSpeed;
     private float targetAngle;
-    private bool isSpinning;
 
 
     public void Initialize(Slots_Machine machineRef) 
@@ -20,7 +19,6 @@ public class Slots_Reel : MonoBehaviour
         // prepare private variables
         spinSpeed = machine.stateControl.master.sys.reelSpinSpeed;
         targetAngle = machine.stateControl.master.sys.reelTargetAngle;
-        isSpinning = false;
     }
 
 
@@ -28,24 +26,20 @@ public class Slots_Reel : MonoBehaviour
     {
         for(;;)
         {
-            if (isSpinning) transform.Rotate(0,spinSpeed,0);
+            transform.Rotate(0,spinSpeed,0);
 
             yield return null;
         }
     }
 
-    /*
-        Change isSpinning bool to its opposite state.
-        If we change from true to false, also call snap().
-    */
-    public void toggleSpin() 
+
+    public void startSpin() => StartCoroutine(Spin());
+    public void stopSpin() 
     {
-        if (isSpinning) 
-            snap(transform.eulerAngles.x, targetAngle);
-        else
-            StartCoroutine(Spin());
-        isSpinning = !isSpinning;
+        snap(transform.eulerAngles.x, targetAngle);
+        Destroy(this);
     }
+    
 
     /*
         Adjust the Reel's rotation so that its x angle fits a targetAngle.

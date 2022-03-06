@@ -20,6 +20,9 @@ public class Slots_StateControl : MonoBehaviour
 
         // set starting game state
         gameState = Slots_GameState.STARTING;
+
+        // initialize machine
+        slotMachine.Initialize(this);
     } 
 
 
@@ -27,19 +30,19 @@ public class Slots_StateControl : MonoBehaviour
     public void progress() {
         switch (gameState) {
             case Slots_GameState.STARTING:
-                slotMachine.Initialize(this);
+                slotMachine.startSpinning();
                 gameState = Slots_GameState.SPINNING;
                 return;
             case Slots_GameState.SPINNING:
-                slotMachine.stopReel1();
+                progressReels();
                 gameState = Slots_GameState.STOPPED_SPIN_1;
                 return;
             case Slots_GameState.STOPPED_SPIN_1:
-                slotMachine.stopReel2();
+                progressReels();
                 gameState = Slots_GameState.STOPPED_SPIN_2;
                 return;
             case Slots_GameState.STOPPED_SPIN_2:
-                slotMachine.stopReel3();
+                progressReels();
                 gameState = Slots_GameState.FINISHING;
                 return;
             case Slots_GameState.FINISHING:
@@ -47,5 +50,10 @@ public class Slots_StateControl : MonoBehaviour
                 master.ui.Terminate();
                 return;
         }
+    }
+
+    private void progressReels() {
+        slotMachine.stopCurrentReel();
+        slotMachine.incrementReelIndex();
     }
 }

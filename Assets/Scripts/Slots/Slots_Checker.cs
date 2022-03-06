@@ -6,12 +6,11 @@ public class Slots_Checker : MonoBehaviour
     [SerializeField] private Slots_Machine slotMachine;
     [SerializeField] private int id;
 
-    /*
-        OnTriggerEnter
-        
-        When symbol changes, update the symbol reference of the slot machine
-    */
-    void OnTriggerEnter(Collider other) {
-        if (other.gameObject.tag == "Symbol") slotMachine.setSymbolReel(id, other.gameObject.name);
+
+    // When symbol changes, update the symbol reference of the slot machine
+    void OnTriggerEnter(Collider other) 
+    {
+        if (other.gameObject.tag == "Symbol") 
+            slotMachine.setSymbolReel(id, other.gameObject.name);
     }
 }
