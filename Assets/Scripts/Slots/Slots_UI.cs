@@ -3,7 +3,8 @@ using UnityEngine.UI;
 
 public class Slots_UI : MonoBehaviour
 {
-    [Header("References")]
+    [Header("Scene References")]
+    [SerializeField] private Slots_System sys;
     [SerializeField] private GameObject resultsScreen;
     [SerializeField] private Text textResult;
     [SerializeField] private Text textScore;
@@ -36,13 +37,13 @@ public class Slots_UI : MonoBehaviour
         {
             case Slots_Outcome.NOTHING:
                 resultScore = -50;
-                textResult.text = master.sys.messageNothing;
-                textScore.text = "Score: " + master.sys.scoreNothing;
+                textResult.text = sys.messageNothing;
+                textScore.text = "Score: " + sys.scoreNothing;
                 break;
             case Slots_Outcome.MATCH:
                 resultScore = 1000;
-                textResult.text = master.sys.messageMatch;
-                textScore.text = "Score: " + master.sys.scoreMatch;
+                textResult.text = sys.messageMatch;
+                textScore.text = "Score: " + sys.scoreMatch;
                 break;
         }
         PlayerPrefs.SetInt("slots_totalScore", PlayerPrefs.GetInt("slots_totalScore") + resultScore);
