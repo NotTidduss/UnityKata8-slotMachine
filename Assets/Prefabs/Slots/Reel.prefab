@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2766309028269857032
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2766309028269857033}
-  m_Layer: 0
-  m_Name: ReelChecker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2766309028269857033
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2766309028269857032}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 2766309029320057117}
-  m_Father: {fileID: 2766309029097931195}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2766309029097931194
 GameObject:
   m_ObjectHideFlags: 0
@@ -40,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2766309029097931195}
+  - component: {fileID: 6326277183276929794}
   m_Layer: 0
-  m_Name: Reel 1
+  m_Name: Reel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,11 +28,25 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8371654237186574350}
-  - {fileID: 2766309028269857033}
+  - {fileID: 4718558541435293427}
+  - {fileID: 2766309029320057117}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6326277183276929794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2766309029097931194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30320ad290cb8de488536451ba0667a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cylinder: {fileID: 7501963418472230513}
+  checker: {fileID: 2766309029320057113}
 --- !u!1 &2766309029320057116
 GameObject:
   m_ObjectHideFlags: 0
@@ -77,7 +61,7 @@ GameObject:
   - component: {fileID: 2766309029320057114}
   - component: {fileID: 2766309029320057113}
   m_Layer: 0
-  m_Name: CheckTrigger
+  m_Name: ReelChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,11 +75,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2766309029320057116}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3, y: 0, z: -5}
+  m_LocalPosition: {x: 0, y: 0, z: -5}
   m_LocalScale: {x: 0.35, y: 1.75, z: 0.75}
   m_Children: []
-  m_Father: {fileID: 2766309028269857033}
-  m_RootOrder: 0
+  m_Father: {fileID: 2766309029097931195}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2766309029320057112
 MeshFilter:
@@ -171,67 +155,80 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bda8095755a04f5409a4a06da59117b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotMachine: {fileID: 0}
-  id: 1
---- !u!1001 &2766309028948521048
+--- !u!1001 &1851620429303777969
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 2766309029097931195}
     m_Modifications:
-    - target: {fileID: 5930660492393117777, guid: 4be691c46d68984419c8e25f865d67b1, type: 3}
-      propertyPath: m_Name
-      value: ReelCylinder
-      objectReference: {fileID: 0}
-    - target: {fileID: 5930660492393117782, guid: 4be691c46d68984419c8e25f865d67b1, type: 3}
+    - target: {fileID: 6397900957797106754, guid: cf74404e02944c547b75749446d91699, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5930660492393117782, guid: 4be691c46d68984419c8e25f865d67b1, type: 3}
+    - target: {fileID: 6397900957797106754, guid: cf74404e02944c547b75749446d91699, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5930660492393117782, guid: 4be691c46d68984419c8e25f865d67b1, type: 3}
+    - target: {fileID: 6397900957797106754, guid: cf74404e02944c547b75749446d91699, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 5930660492393117782, guid: 4be691c46d68984419c8e25f865d67b1, type: 3}
+    - target: {fileID: 6397900957797106754, guid: cf74404e02944c547b75749446d91699, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5930660492393117782, guid: 4be691c46d68984419c8e25f865d67b1, type: 3}
+    - target: {fileID: 6397900957797106754, guid: cf74404e02944c547b75749446d91699, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.7071068
       objectReference: {fileID: 0}
-    - target: {fileID: 5930660492393117782, guid: 4be691c46d68984419c8e25f865d67b1, type: 3}
+    - target: {fileID: 6397900957797106754, guid: cf74404e02944c547b75749446d91699, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5930660492393117782, guid: 4be691c46d68984419c8e25f865d67b1, type: 3}
+    - target: {fileID: 6397900957797106754, guid: cf74404e02944c547b75749446d91699, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5930660492393117782, guid: 4be691c46d68984419c8e25f865d67b1, type: 3}
+    - target: {fileID: 6397900957797106754, guid: cf74404e02944c547b75749446d91699, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.7071068
       objectReference: {fileID: 0}
-    - target: {fileID: 5930660492393117782, guid: 4be691c46d68984419c8e25f865d67b1, type: 3}
+    - target: {fileID: 6397900957797106754, guid: cf74404e02944c547b75749446d91699, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5930660492393117782, guid: 4be691c46d68984419c8e25f865d67b1, type: 3}
+    - target: {fileID: 6397900957797106754, guid: cf74404e02944c547b75749446d91699, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5930660492393117782, guid: 4be691c46d68984419c8e25f865d67b1, type: 3}
+    - target: {fileID: 6397900957797106754, guid: cf74404e02944c547b75749446d91699, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 6397900957797106757, guid: cf74404e02944c547b75749446d91699, type: 3}
+      propertyPath: m_Name
+      value: ReelCylinder
+      objectReference: {fileID: 0}
+    - target: {fileID: 6397900957797106766, guid: cf74404e02944c547b75749446d91699, type: 3}
+      propertyPath: checker
+      value: 
+      objectReference: {fileID: 2766309029320057113}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4be691c46d68984419c8e25f865d67b1, type: 3}
---- !u!4 &8371654237186574350 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: cf74404e02944c547b75749446d91699, type: 3}
+--- !u!4 &4718558541435293427 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 5930660492393117782, guid: 4be691c46d68984419c8e25f865d67b1, type: 3}
-  m_PrefabInstance: {fileID: 2766309028948521048}
+  m_CorrespondingSourceObject: {fileID: 6397900957797106754, guid: cf74404e02944c547b75749446d91699, type: 3}
+  m_PrefabInstance: {fileID: 1851620429303777969}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7501963418472230513 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8191507875928024256, guid: cf74404e02944c547b75749446d91699, type: 3}
+  m_PrefabInstance: {fileID: 1851620429303777969}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f05a2318d9cc247a803ff95f2e2e01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

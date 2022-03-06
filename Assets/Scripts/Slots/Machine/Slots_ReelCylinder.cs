@@ -1,24 +1,17 @@
 using System.Collections;
 using UnityEngine;
 
-public class Slots_Reel : MonoBehaviour
-{    
-    //* link
-    public Slots_Machine machine { get; private set; }
-
+public class Slots_ReelCylinder : MonoBehaviour
+{
     //* private vars
     private float spinSpeed;
     private float targetAngle;
 
-
-    public void Initialize(Slots_Machine machineRef) 
+    public void Initialize(float spinSpeedRef, float targetAngleRef)
     {
-        // set link
-        machine = machineRef;
-
-        // prepare private variables
-        spinSpeed = machine.stateControl.master.sys.reelSpinSpeed;
-        targetAngle = machine.stateControl.master.sys.reelTargetAngle;
+        // set private vars
+        spinSpeed = spinSpeedRef;
+        targetAngle = targetAngleRef;
     }
 
 
@@ -39,7 +32,7 @@ public class Slots_Reel : MonoBehaviour
         snap(transform.eulerAngles.x, targetAngle);
         Destroy(this);
     }
-    
+
 
     /*
         Adjust the Reel's rotation so that its x angle fits a targetAngle.

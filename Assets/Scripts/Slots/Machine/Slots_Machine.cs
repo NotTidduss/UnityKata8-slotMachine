@@ -34,7 +34,7 @@ public class Slots_Machine : MonoBehaviour
         for (int i = 0; i < reelCount; i++) {
             GameObject reelObject = Instantiate(reelPrefab, new Vector3(i * reelDistance, 0, 0), reelPrefab.transform.rotation, this.gameObject.transform);
             reelObjects.Add(reelObject);
-            reelObject.GetComponent<Slots_Reel>().Initialize(this);
+            reelObject.GetComponent<Slots_Reel>().Initialize(this, i);
         }
     }
 
