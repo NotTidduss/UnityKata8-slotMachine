@@ -1340,11 +1340,13 @@ MonoBehaviour:
   btnInteract: 32
   reelCount: 3
   reelDistance: 3
-  messageMatch: YOU WIN
-  messageNothing: YOU LOSE
-  scoreMatch: 1000
-  scoreNothing: -50
-  reelSpinSpeed: 0.5
+  messageWin: YOU WIN
+  messageLose: YOU LOSE
+  scoreWinRow: 1000
+  scoreWinDiagonal: 1500
+  scoreWinCherry: 100
+  scoreLose: -50
+  reelSpinSpeed: 0.1
   reelTargetAngle: 45
 --- !u!1 &1870394610
 GameObject:

@@ -14,10 +14,12 @@ public class Slots_System : MonoBehaviour
     [Header ("Slot Machine Preferences")]
     public int reelCount = 3;
     public float reelDistance = 3;
-    public string messageMatch = "YOU WIN";
-    public string messageNothing = "YOU LOSE";
-    public float scoreMatch = 1000;
-    public float scoreNothing = -50;
+    public string messageWin = "YOU WIN";
+    public string messageLose = "YOU LOSE";
+    public int scoreWinRow = 1000;
+    public int scoreWinDiagonal = 1500;
+    public int scoreWinCherry = 100;
+    public int scoreLose = -50;
     
 
     [Header("Reel Preferences")]

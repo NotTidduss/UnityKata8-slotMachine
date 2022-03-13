@@ -22,7 +22,13 @@ public class Slots_ReelChecker : MonoBehaviour
     // When symbol changes, update the symbol reference of the slot machine
     void OnTriggerEnter(Collider other) 
     {
-        if (other.gameObject.tag == "Symbol") 
-            reel.machine.setSymbolReel(id, other.gameObject.name);
+        if (other.gameObject.tag == "Symbol") {
+            reel.machine.setSymbolOfReel(id, new Slots_Symbol(mapObjectNameToSymbolType(other.gameObject.name)));
+        }
     }
+
+
+    // get the last char of name, parse to int, convert to symbolType
+    private Slots_SymbolType mapObjectNameToSymbolType(string symbolObjectName) => 
+        (Slots_SymbolType)int.Parse(symbolObjectName.Substring(symbolObjectName.Length - 1));
 }

@@ -36,16 +36,24 @@ public class Slots_UI : MonoBehaviour
         switch ((Slots_Outcome)PlayerPrefs.GetInt("slots_outcome")) 
         {
             case Slots_Outcome.NOTHING:
-                resultScore = -50;
-                textResult.text = sys.messageNothing;
-                textScore.text = "Score: " + sys.scoreNothing;
+                resultScore = sys.scoreLose;
+                textResult.text = sys.messageLose;
                 break;
-            case Slots_Outcome.MATCH:
-                resultScore = 1000;
-                textResult.text = sys.messageMatch;
-                textScore.text = "Score: " + sys.scoreMatch;
+            case Slots_Outcome.ROW_WIN:
+                resultScore = sys.scoreWinRow;
+                textResult.text = sys.messageWin;
+                break;
+            case Slots_Outcome.DIAGONAL_WIN:
+                resultScore = sys.scoreWinDiagonal;
+                textResult.text = sys.messageWin;
+                break;
+            case Slots_Outcome.CHERRY_WIN:
+                resultScore = sys.scoreWinCherry;
+                textResult.text = sys.messageWin;
                 break;
         }
+        textScore.text = "Score: " + resultScore;
+        
         PlayerPrefs.SetInt("slots_totalScore", PlayerPrefs.GetInt("slots_totalScore") + resultScore);
         textTotalScore.text = "Total Score: " + PlayerPrefs.GetInt("slots_totalScore").ToString();
     }

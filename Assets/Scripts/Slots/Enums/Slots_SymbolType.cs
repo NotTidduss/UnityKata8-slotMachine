@@ -10,7 +10,7 @@
     DOG = 6
     SEVEN = 7
 */
-public enum Slots_SymbolName {
+public enum Slots_SymbolType {
     CHERRY,
     MELON,
     BELL,

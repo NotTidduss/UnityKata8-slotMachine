@@ -46,7 +46,7 @@ public class Slots_StateControl : MonoBehaviour
                 gameState = Slots_GameState.FINISHING;
                 return;
             case Slots_GameState.FINISHING:
-                slotMachine.Terminate();
+                slotMachine.evaluateResult();
                 master.ui.Terminate();
                 return;
         }
